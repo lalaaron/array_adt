@@ -259,14 +259,15 @@ int Array::get_value(int index)
     return -1;
 }
 
-
-int Array::get_param(int param)
+int Array::get_size()
 {
-    if(param == 1) return size;
-    else if(param == 2) return length;
-    else return -1;
+    return size;
 }
 
+int Array::get_length()
+{
+    return length;
+}
 
 void Array::set_value(int index, int x)
 {
@@ -435,8 +436,8 @@ Array Array::merge(Array arr1, Array arr2)
 	int i,j,k, c_len;
     i=j=k=0;
     //Get lengths of arrays 1 & 2 (parameter 2)
-    int m = arr1.get_param(2);
-    int n = arr2.get_param(2);
+    int m = arr1.get_length();
+    int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
     int *c = new int [c_len+10];
@@ -573,8 +574,8 @@ Array Array::Union(Array arr1, Array arr2)
 	int i,j,k, c_len;
     i=j=k=0;
     //Get lengths of arrays 1 & 2 (parameter 2)
-    int m = arr1.get_param(2);
-    int n = arr2.get_param(2);
+    int m = arr1.get_length();
+    int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
     int *c = new int [c_len+10];
@@ -616,8 +617,8 @@ Array Array::Intersection(Array arr1, Array arr2)
 	int i,j,k, c_len;
     i=j=k=0;
     //Get lengths of arrays 1 & 2 (parameter 2)
-    int m = arr1.get_param(2);
-    int n = arr2.get_param(2);
+    int m = arr1.get_length();
+    int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
     int *c = new int [c_len+10];
@@ -655,8 +656,8 @@ Array Array::Difference(Array arr1, Array arr2)
 	int i,j,k, c_len;
     i=j=k=0;
     //Get lengths of arrays 1 & 2 (parameter 2)
-    int m = arr1.get_param(2);
-    int n = arr2.get_param(2);
+    int m = arr1.get_length();
+    int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
     int *c = new int [c_len+10];

@@ -10,8 +10,8 @@ using namespace std;
 //    int i,j,k, c_len;
 //    i=j=k=0;
 //    //Get lengths of arrays 1 & 2 (parameter 2)
-//    int m = arr1.get_param(2);
-//    int n = arr2.get_param(2);
+//    int m = arr1.get_length();
+//    int n = arr2.get_length();
 //    c_len=m+n;
 //    //Initialise array in heap with 10 spare
 //    int *c = new int [c_len+10];
@@ -42,20 +42,23 @@ using namespace std;
 int main() {
  
     int n,key,index;
-    char cont = 'y', yes = 'n';
-    Array arr(20);
+    char cont = 'y', yes = 'y';
+//    Array arr(20);
+    Array * arr = new Array(20);
     // arr.create();
-    arr.test_array();
+    arr->test_array();
     cout<<"Test array: "<<flush;
-    arr.display(); cout<<endl;
+    arr->display(); cout<<endl;
 
     /* Testing merge_sort */
-//    n = arr.get_param(2);
+//    n = arr.get_length();
 //    Array arr_sorted = arr.merge_sort(0,n-1);
-    int *B = arr.merge_sort_A_handler();
-    Array arr_sorted(arr.get_param(1),arr.get_param(2),B);
+    int *B = arr->merge_sort_A_handler();
+//    Array arr_sorted(arr.get_size(),arr.get_length(),B);
+    Array * arr_sorted = new Array(arr->get_size(),arr->get_length(),B);
     cout<<"Sorted array: "<<flush;
-    arr_sorted.display(); cout<<endl;
+    arr_sorted->display(); cout<<endl;
+
 
 //     /* Testing Union(), Intersection() and Difference
 //      * on sorted arrays */
@@ -161,8 +164,8 @@ int main() {
         //     arr.display();
 
 //        /* Testing get_param() */
-//        cout<<"Size: "<<arr.get_param(1)<<endl;
-//        cout<<"Length: "<<arr.get_param(2)<<endl;
+//        cout<<"Size: "<<arr.get_size()<<endl;
+//        cout<<"Length: "<<arr.get_length()<<endl;
 
         cout<<"Do you wish to continue? (y/n): "<<flush;
         cin>>cont;
@@ -172,5 +175,9 @@ int main() {
     // arr.sign_split();
     // arr.display();
     
+    /* Delete Array objects in heap */
+    delete arr;
+    delete arr_sorted;
+
     return 0;
 }

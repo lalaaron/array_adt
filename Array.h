@@ -35,7 +35,8 @@ public:
     int search(int value);
     int binary_search(int key);
     int get_value(int index);
-    int get_param(int param);
+    int get_size();
+    int get_length();
     void set_value(int index, int x);
     void set_param(int param, int value);
     int max_value();
