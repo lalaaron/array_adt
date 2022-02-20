@@ -33,7 +33,7 @@ using namespace std;
 //    for(;j<m;j++)
 ////        arr3.A[k++] = arr2.A[j];
 //    	arr3.set_value(k++, arr2.get_value[j]);
-//    arr3.set_param(2,c_len);
+//    arr3.set_length(c_len);
 //
 //    return arr3;
 //}
@@ -43,8 +43,8 @@ int main() {
  
     int n,key,index;
     char cont = 'y', yes = 'y';
-//    Array arr(20);
-    Array * arr = new Array(20);
+//    Array<int> arr(20);
+    Array<int> * arr = new Array<int>(20);
     // arr.create();
     arr->test_array();
     cout<<"Test array: "<<flush;
@@ -52,10 +52,10 @@ int main() {
 
     /* Testing merge_sort */
 //    n = arr.get_length();
-//    Array arr_sorted = arr.merge_sort(0,n-1);
+//    Array<int> arr_sorted = arr.merge_sort(0,n-1);
     int *B = arr->merge_sort_A_handler();
-//    Array arr_sorted(arr.get_size(),arr.get_length(),B);
-    Array * arr_sorted = new Array(arr->get_size(),arr->get_length(),B);
+//    Array<int> arr_sorted(arr.get_size(),arr.get_length(),B);
+    Array<int> * arr_sorted = new Array<int>(arr->get_size(),arr->get_length(),B);
     cout<<"Sorted array: "<<flush;
     arr_sorted->display(); cout<<endl;
 

@@ -11,40 +11,41 @@
 
 using namespace std;
 
-Array::Array(){
+template<class T>
+Array<T>::Array(){
 	cout << "Array created" << endl;
 	this->A = NULL;
     this->size=0;
     this->length=0;
 }
 
-
-Array::Array(int size){
+template<class T>
+Array<T>::Array(int size){
 	cout << "Array created" << endl;
     this->size = size;
     this->length=0;
-    A = new int [size];
+    A = new T [size];
 }
 
-
-Array::Array(int size, int length, int *B){
+template<class T>
+Array<T>::Array(int size, int length, T *B){
 	cout << "Array created" << endl;
     this->size = size;
     this->length = length;
     A = B;
 }
 
-
-Array::~Array(){
+template<class T>
+Array<T>::~Array(){
     delete[] A;
     cout << "Array destroyed" << endl;
 }
 
-
-void Array::reverse_array()
+template<class T>
+void Array<T>::reverse_array()
 {
     int i,j;
-    int *B = new int [size];
+    T *B = new T [size];
     for(i=0,j=length-1; i<length; i++,j--)
     {
         B[i]=A[j];
@@ -53,17 +54,17 @@ void Array::reverse_array()
     A=B;
 }
 
-
-void Array::swap(int *x, int *y)
+template<class T>
+void Array<T>::swap(T *x, T *y)
 {
-    int temp;
+    T temp;
     temp = *x;
     *x = *y;
     *y = temp;
 }
 
-
-void Array::reverse_outside_in()
+template<class T>
+void Array<T>::reverse_outside_in()
 {
     int i,j;
     for(i=0,j=length-1; i<j; i++,j--)
@@ -72,8 +73,8 @@ void Array::reverse_outside_in()
     }
 }
 
-
-void Array::create(){
+template<class T>
+void Array<T>::create(){
     cout << "Enter number of elements: " << flush;
     cin >> length;
     cout << "Enter the array elements: " << endl;
@@ -83,8 +84,8 @@ void Array::create(){
     }
 }
 
-
-void Array::test_array()
+template<class T>
+void Array<T>::test_array()
 {
     int i;
     //int temp_arr[size] = {4,8,10,15,18,21,24,27,29,33,34,37,39,41,43};
@@ -98,16 +99,16 @@ void Array::test_array()
     	A[i]=0;
 }
 
-
-void Array::display(){
+template<class T>
+void Array<T>::display(){
     for (int i = 0; i < length; i++){
         cout << A[i] << " ";
     }
     cout<<flush;
 }
 
-
-void Array::append(int x)
+template<class T>
+void Array<T>::append(T x)
 {
 
     if(length<size)
@@ -119,8 +120,8 @@ void Array::append(int x)
     else cout<<"Max array size reached. Append aborted!"<<endl;
 }
 
-
-void Array::insert(int index, int value)
+template<class T>
+void Array<T>::insert(int index, T value)
 {
     if(length>=size)
         cout<<"Array size at maximum. Insert aborted!"<<endl;
@@ -136,8 +137,8 @@ void Array::insert(int index, int value)
     }
 }
 
-
-int Array::binary_insert(int value)
+template<class T>
+int Array<T>::binary_insert(T value)
 {
     int low=0,high=length,mid,i;
     if(length>=size)
@@ -162,10 +163,10 @@ int Array::binary_insert(int value)
     return low;
 }
 
-
-int Array::remove(int index)
+template<class T>
+T Array<T>::remove(int index)
 {
-    int x;
+    T x;
     int i;
     if(index>=0 && index<length)
     {
@@ -181,7 +182,8 @@ int Array::remove(int index)
     return 0;
 }
 
-int Array::search(int value)
+template<class T>
+int Array<T>::search(T value)
 {
     int i;
 
@@ -218,8 +220,8 @@ int Array::search(int value)
     return -1;
 }
 
-
-int Array::binary_search(int key)
+template<class T>
+int Array<T>::binary_search(T key)
 {
     /* Iterative algorithm based on tail recursion */
     int mid, low=0, high=length-1;
@@ -250,8 +252,8 @@ int Array::binary_search(int key)
     // return -1;
 }
 
-
-int Array::get_value(int index)
+template<class T>
+T Array<T>::get_value(int index)
 {
     if(index>=0 && index<length)
         return A[index];
@@ -259,17 +261,20 @@ int Array::get_value(int index)
     return -1;
 }
 
-int Array::get_size()
+template<class T>
+int Array<T>::get_size()
 {
     return size;
 }
 
-int Array::get_length()
+template<class T>
+int Array<T>::get_length()
 {
     return length;
 }
 
-void Array::set_value(int index, int x)
+template<class T>
+void Array<T>::set_value(int index, T x)
 {
     if(index>=0 && index<length)
         A[index]=x;
@@ -277,19 +282,23 @@ void Array::set_value(int index, int x)
         cout<<"Invalid index"<<flush;
 }
 
-
-void Array::set_param(int param, int value)
+template<class T>
+void Array<T>::set_size(int sz)
 {
-    if(param == 1) size=value;
-    else if(param == 2) length=value;
-    else cout<<"Invalid parameter"<<endl;
+	size = sz;
 }
 
+template<class T>
+void Array<T>::set_length(int len)
+{
+	length = len;
+}
 
-int Array::max_value()
+template<class T>
+T Array<T>::max_value()
 {
     int i;
-    int max=A[0];
+    T max = A[0];
     for(i=1;i<length;i++)
     {
         if(A[i]>max)
@@ -298,11 +307,11 @@ int Array::max_value()
     return max;
 }
 
-
-int Array::min_value()
+template<class T>
+T Array<T>::min_value()
 {
     int i;
-    int min=A[0];
+    T min = A[0];
     for(i=1;i<length;i++)
     {
         if(A[i]<min)
@@ -311,24 +320,24 @@ int Array::min_value()
     return min;
 }
 
-
-int Array::sum_of_values()
+template<class T>
+T Array<T>::sum_of_values()
 {
     int i;
-    int total=0;
+    T total = 0;
     for(i=0;i<length;i++)
         total+=A[i];
     return total;
 }
 
-
-float Array::average_value()
+template<class T>
+float Array<T>::average_value()
 {
     return float(sum_of_values())/length;
 }
 
-
-void Array::shift_left(int n)
+template<class T>
+void Array<T>::shift_left(int n)
 {
     if(n<=length && n>0)
     {
@@ -344,8 +353,8 @@ void Array::shift_left(int n)
         cout<<"Invalid number of places "<<endl;
 }
 
-
-void Array::shift_right(int n)
+template<class T>
+void Array<T>::shift_right(int n)
 {
     if(n<=length && n>0)
     {
@@ -361,8 +370,8 @@ void Array::shift_right(int n)
         cout<<"Invalid number of places "<<endl;
 }
 
-
-void Array::rotate_left(int n)
+template<class T>
+void Array<T>::rotate_left(int n)
 {
     if(n>0)
     {
@@ -381,8 +390,8 @@ void Array::rotate_left(int n)
         cout<<"Invalid argument: must be n>0 "<<endl;
 }
 
-
-void Array::rotate_right(int n)
+template<class T>
+void Array<T>::rotate_right(int n)
 {
     if(n>0)
     {
@@ -401,7 +410,8 @@ void Array::rotate_right(int n)
         cout<<"Invalid argument: must be n>0 "<<endl;
 }
 
-void Array::sign_split()
+template<class T>
+void Array<T>::sign_split()
 {
     int i=0, j=length-1;
     while(i<j)
@@ -413,7 +423,8 @@ void Array::sign_split()
     }
 }
 
-int Array::is_sorted()
+template<class T>
+int Array<T>::is_sorted()
 {
     int i;
     for(i=1;i<length;i++)
@@ -424,7 +435,8 @@ int Array::is_sorted()
     return 1;
 }
 
-Array Array::merge(Array arr1, Array arr2)
+template<class T>
+Array<T> Array<T>::merge(Array<T> arr1, Array<T> arr2)
 {
 //	/* Debug output */
 //    cout<<"Merging: {"<<flush;
@@ -440,7 +452,7 @@ Array Array::merge(Array arr1, Array arr2)
     int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
-    int *c = new int [c_len+10];
+    T *c = new T [c_len+10];
 //    Array *arr3 = new Array(c_len+10,0,c);
     Array arr3(c_len+10,0,c);
 //    cout<<"Created "<<flush;  //debug
@@ -457,19 +469,20 @@ Array Array::merge(Array arr1, Array arr2)
         arr3.A[k++] = arr1.A[i];
     for(;j<n;j++)
         arr3.A[k++] = arr2.A[j];
-    arr3.set_param(2,c_len);
+    arr3.set_length(c_len);
 
     return arr3;
 }
 
-Array Array::merge_sort(int start, int end)
+template<class T>
+Array<T> Array<T>::merge_sort(int start, int end)
 {
 //	cout<<"Sorting index["<<start<<":"<<end<<"]"<<endl;  //debug
 	if(end <= start)
 	{
 		int value = A[start];
 //		cout<<"Created "<<flush;  //debug
-		int *p = new int [1] {value};
+		T *p = new T [1] {value};
 		Array arr0(1,1,p);
 //		arr0.display(); cout<<endl;  //debug
 		return arr0;
@@ -487,7 +500,8 @@ Array Array::merge_sort(int start, int end)
 	return sorted_array;
 }
 
-int * Array::merge_A(int *L, int len_l, int *H, int len_h, int arr_size)
+template<class T>
+T * Array<T>::merge_A(T *L, int len_l, T *H, int len_h, int arr_size)
 {
 //	/* Debug output */
 //    cout<<"Merging: {"<<flush;
@@ -500,7 +514,7 @@ int * Array::merge_A(int *L, int len_l, int *H, int len_h, int arr_size)
     i=j=k=0;
     len_m = len_l + len_h;
     //Initialise array in heap with 10 spare
-    int *M = new int [arr_size];  //[len_m];
+    T *M = new T [arr_size];  //[len_m];
 //    cout<<"Heap array["<<len_m<<"] created"<<endl;
     //Loop through arrays 1 & 2 merging to 3
     while(i<len_l && j<len_h)
@@ -518,13 +532,14 @@ int * Array::merge_A(int *L, int len_l, int *H, int len_h, int arr_size)
     return M;
 }
 
-int * Array::merge_sort_A(int start, int end, int arr_size)
+template<class T>
+T * Array<T>::merge_sort_A(int start, int end, int arr_size)
 {
 //	cout<<"Sorting index["<<start<<":"<<end<<"]"<<endl;  //debug
 	if(end <= start)
 	{
 		int value = A[start];
-		int *s = new int [1] {value};
+		T *s = new T [1] {value};
 //		cout<<"Heap array[1] created"<<endl;
 		return s;
 	}
@@ -535,15 +550,15 @@ int * Array::merge_sort_A(int start, int end, int arr_size)
 	half_size = arr_size / 2;
 //	len_s = (end-start)+1;
 
-	int *l;  // = new int [len_l];
+	T *l;  // = new int [len_l];
 //	cout<<"Heap array["<<len_l<<"] created"<<endl;
 	l = merge_sort_A(start,mid,half_size);
 
-	int *h;  // = new int [len_h];
+	T *h;  // = new int [len_h];
 //	cout<<"Heap array["<<len_h<<"] created"<<endl;
 	h = merge_sort_A(mid+1,end,half_size);
 
-	int *s;
+	T *s;
 	s = merge_A(l, len_l, h, len_h, arr_size);
 
 	delete [] l;
@@ -554,15 +569,17 @@ int * Array::merge_sort_A(int start, int end, int arr_size)
 	return s;
 }
 
-int * Array::merge_sort_A_handler()
+template<class T>
+T * Array<T>::merge_sort_A_handler()
 {
-	int *sorted;  // = new int [size];
+	T *sorted;  // = new int [size];
 //	cout << "Primary heap array[" << size << "] created" << endl;
 	sorted = merge_sort_A(0, length-1, size);
 	return sorted;
 }
 
-Array Array::Union(Array arr1, Array arr2)
+template<class T>
+Array<T> Array<T>::Union(Array<T> arr1, Array<T> arr2)
 {
 //	/* Debug output */
 //    cout<<"Uniting: {"<<flush;
@@ -578,7 +595,7 @@ Array Array::Union(Array arr1, Array arr2)
     int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
-    int *c = new int [c_len+10];
+    T *c = new T [c_len+10];
 //    Array *arr3 = new Array(c_len+10,0,c);
     Array arr3(c_len+10,0,c);
 //    cout<<"Created "<<flush;  //debug
@@ -600,12 +617,13 @@ Array Array::Union(Array arr1, Array arr2)
         arr3.A[k++] = arr1.A[i];
     for(;j<n;j++)
         arr3.A[k++] = arr2.A[j];
-    arr3.set_param(2,k);
+    arr3.set_length(k);
 
     return arr3;
 }
 
-Array Array::Intersection(Array arr1, Array arr2)
+template<class T>
+Array<T> Array<T>::Intersection(Array<T> arr1, Array<T> arr2)
 {
 //	/* Debug output */
 //    cout<<"Intersecting: {"<<flush;
@@ -621,7 +639,7 @@ Array Array::Intersection(Array arr1, Array arr2)
     int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
-    int *c = new int [c_len+10];
+    T *c = new T [c_len+10];
 //    Array *arr3 = new Array(c_len+10,0,c);
     Array arr3(c_len+10,0,c);
 //    cout<<"Created "<<flush;  //debug
@@ -639,12 +657,13 @@ Array Array::Intersection(Array arr1, Array arr2)
         	j++;
         }
     }
-    arr3.set_param(2,k);
+    arr3.set_length(k);
 
     return arr3;
 }
 
-Array Array::Difference(Array arr1, Array arr2)
+template<class T>
+Array<T> Array<T>::Difference(Array<T> arr1, Array<T> arr2)
 {
 //	/* Debug output */
 //    cout<<"Uniting: {"<<flush;
@@ -660,7 +679,7 @@ Array Array::Difference(Array arr1, Array arr2)
     int n = arr2.get_length();
     c_len=m+n;
     //Initialise array in heap with 10 spare
-    int *c = new int [c_len+10];
+    T *c = new T [c_len+10];
 //    Array *arr3 = new Array(c_len+10,0,c);
     Array arr3(c_len+10,0,c);
 //    cout<<"Created "<<flush;  //debug
@@ -677,7 +696,7 @@ Array Array::Difference(Array arr1, Array arr2)
     }
     for(;i<m;i++)
         arr3.A[k++] = arr1.A[i];
-    arr3.set_param(2,k);
+    arr3.set_length(k);
 
     return arr3;
 }
